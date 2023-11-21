@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} SnapPulse {% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/icons.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="block_icons">
+    <ul class="icons_list">
+      <li class="icons_items home"  style="background-image: url('{% static 'icons/home.png' %}');">
+        <span class="icons_text">Home</span>
+      </li>
+      <li class="icons_items search" style="background-image: url('{% static 'icons/search.png' %}');">
+        <span class="icons_text">Search</span>
+      </li>
+      <li class="icons_items explore" onclick="changeUrl" style="background-image: url('{% static 'icons/explore.png' %}');">
+        <span class="icons_text">Explore</span>
+      </li>
+      <li class="icons_items reels"  style="background-image: url('{% static 'icons/reels.png' %}');">
+        <span class="icons_text">Reels</span>
+      </li>
+      <li class="icons_items messages" onclick="changeUrl( {% url 'messages' %} )" style="background-image: url('{% static 'icons/messages.png' %}');">
+        <span class="icons_text">Messages</span>
+      </li>
+      <li class="icons_items notifications"  style="background-image: url('{% static 'icons/notifications.png' %}');">
+        <span class="icons_text">Notifications</span>
+      </li>
+      <li id="createPostTrigger" class="icons_items create" style="background-image: url('{% static 'icons/create.png' %}');">
+        <span class="icons_text">Create</span>
+      </li>
+      <li class="icons_items profile"  style="background-image: url('{% static 'icons/profile.png' %}');">
+        <span class="icons_text">Profile</span>
+      </li>
+    </ul>
+</div>
+
+<div class="section_post">
+<div class="post">
+    <div class="post-header">
+        <div class="user-image">
+            <img src=".jpg" alt="User">
+        </div>
+        <div class="username">username</div>
+    </div>
+    <div class="post-content">
+        <div class="carousel">
+            <div class="carousel-item active">
+                <img src="url('/static/images/photo_2023-11-21_00-44-13.jpg')" alt="Post Image">
+            </div>
+            <div class="carousel-item">
+                <video autoplay loop muted>
+                    <source src="../blackpink.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- Добавьте дополнительные элементы карусели здесь -->
+        </div>
+        <button class="carousel-control left">←</button>
+        <button class="carousel-control right">→</button>
+    </div>
+</div>
+</div>
+
+<div id="createPostModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <!-- Форма для создания обычного поста -->
+        <form method="post" enctype="multipart/form-data" class="form-container">
+            {% csrf_token %}
+            <h2>Create Post</h2>
+            {% for field in post_form %}
+                <div class="form-group">
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="form-group">
+                <label for="media_files">Images and Videos:</label>
+                <input type="file" name="media_files" multiple id="media_files" class="form-control-file">
+            </div>
+            <input type="submit" value="Create Post" class="btn btn-primary">
+        </form>
+
+        <!-- Форма для добавления видео в Reels -->
+        <form method="post" enctype="multipart/form-data" class="form-container">
+            {% csrf_token %}
+            <h2>Create Reel</h2>
+            {% for field in reels_form %}
+                <div class="form-group">
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <input type="submit" value="Create Reel" class="btn btn-secondary">
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    function changeUrl(url) {
+        window.location.href = url;
+    }
+</script>
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

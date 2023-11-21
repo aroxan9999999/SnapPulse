@@ -1,0 +1,93 @@
+.block_icons {
+  position: fixed;
+  max-width: 300px;
+  z-index: 2;
+}
+
+.icons_list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.icons_list .icons_items:first-child {
+  margin-top: 25px;
+}
+
+
+.icons_items {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  margin-bottom: 17px;
+  transition: box-shadow 0.3s;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+}
+
+
+.icons_items:hover,
+.icons_items:hover .icons_text {
+  box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+  text-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+}
+
+
+.icons_items.active,
+.icons_items.active .icons_text {
+  box-shadow: inset 0 0 15px rgba(0, 128, 0, 0.5), 0 0 15px rgba(0, 128, 0, 0.5);
+  text-shadow: 0 0 15px rgba(0, 128, 0, 0.5);
+}
+
+
+
+
+.icons_text {
+  flex-grow: 1;
+  text-align: left;
+  color: wheat;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin-left: 59px;
+}
+
+
+.icons_items.home {
+  background-image: url('../icons/home.png');
+}
+
+.icons_items.search {
+  background-image: url('../icons/search.png');
+}
+
+.icons_items.explore {
+  background-image: url('../icons/explore.png');
+}
+
+.icons_items.reels {
+  background-image: url('../icons/reels.png');
+}
+
+.icons_items.messages {
+  background-image: url('../icons/messages.png');
+}
+
+.icons_items.notifications {
+  background-image: url('../icons/notifications.png');
+}
+
+.icons_items.create {
+  background-image: url('../icons/create.png');
+}
+
+.icons_items.profile {
+  background-image: url('../icons/profile.png');
+}
+
+

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Reels{% endblock %}
+{% load static %}
+{% block style %}
+<meta name="csrf-token" content="{{ csrf_token }}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/reels.css' %}">
+{% endblock %}
+{% block content %}
+<div class="rels_container" id="videoContainer">
+    <div id="{{ video.slug }}" class="reels">
+        <video id="currentVideo" autoplay muted loop>
+           <source src="{{ video.video.url }}" type="video/mp4">
+        </video>
+        </div>
+            <div class="block_icons">
+            <div style="{% if heart_status.status == 'added' %}background-image: url('/static/icons/love_heart.png');{% else %}background-image: url('/static/icons/easy_heart.png');{% endif %}" class="icons heart" data-video-slug="{{ video.slug }}" onclick="toggleLove('love_reels_{{ video.slug }}', {{ request.user.pk }})"><span class="count">{{ heart_status.count }}</span></div>
+            <div class="icons  chat" onclick="toggleChatDisplay()"></div>
+            <div class="icons  view">
+                <span class="view_count"></span>
+            </div>
+        </div>
+        <div id='chat_content_reels_{{chat.slug}}' class="reels_chat">
+            <div class="chat_form">
+                <input id="chat-message-input" type="text" size="100"><br>
+                <input id="chat-message-submit" type="button" value="Send">
+            </div>
+                <div class="message">
+                <p class="author"><span class="author_name"></span></p><br>
+                <p class="author_text"></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/reels.js' %}"></script>
+<script type="text/javascript">
+    incrementViewCount("view_{{ video.slug }}");
+</script>
+
+{% endblock %}

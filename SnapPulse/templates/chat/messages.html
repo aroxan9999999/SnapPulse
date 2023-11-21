@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Messages{% endblock %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/messages.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="container">
+    <div id="users">
+        {% for user in users %}
+        <div class="user" onclick="toggleChat('{{ user.username }}')">
+            <div class="user_photo colorful_border" style="background-image: url('{{ user.profile_pic.url}}');"></div>
+            <div class="user_info">
+                <div class="user_name">{{ user.username }}
+                    <span class="notification">{{ user.unread_messages_count }}7</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div id="chats">
+            {% for user in users %}
+    <div id="chat_{{ request.user }}_to_{{ user.username }}" class="chat" data-semder="{{ request.user }}" data-room-name="chat_{{ request.user }}_to_{{ user.username }}">
+        <div class="messages"></div>
+            <form id="upload-form_{{ user.pk }}" class="upload-form" enctype="multipart/form-data">
+                <div class="input-group">
+                    <textarea class="message-text" name="message" rows="3" placeholder="Введите ваше сообщение здесь..."></textarea>
+                    <label for="file-input-{{ user.pk }}" class="file-upload-label">
+                        <span class="file-icon">+</span>
+                        <span class="file-count">0 файлов</span>
+                    </label>
+                    <button type="submit" class="send-button">▶</button>
+                </div>
+                <input type="file" id="file-input-{{ user.pk }}" class="file-input" name="files" accept="image/*,video/*" multiple hidden>
+                <div class="file-preview-container"></div>
+            </form>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/messages.js' %}"></script>
+<script src="{% static 'js/send_messages.js' %}"></script>
+<script src="{% static 'js/socket.js' %}"></script>
+{% endblock %}

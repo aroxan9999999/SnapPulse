@@ -1,0 +1,309 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    background-color: #ccc;
+}
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+#users, #chats {
+    max-height: calc(100vh - 20px);
+    overflow-y: auto;
+}
+
+#users {
+    width: 30%;
+    margin-right: 20px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    transition: background-color 0.3s;
+    position: relative;
+}
+
+.user:hover {
+    background-color: #f5f5f5;
+}
+
+.user.active {
+    background-color: #e9e9e9;
+    border-left: 4px solid #4CAF50;
+}
+
+.user_photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    margin-right: 10px;
+    border: 3px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.colorful_border {
+    animation: rainbow_animation 3s infinite;
+}
+
+@keyframes rainbow_animation {
+    0% { border-color: red; }
+    25% { border-color: rgb(255, 0, 179); }
+    50% { border-color: yellow; }
+    75% { border-color: green; }
+    100% { border-color: rgb(0, 255, 149); }
+}
+
+.user_info {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.user_name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+}
+
+.notification {
+    position: absolute;
+    right: 70%; 
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(119, 75, 135);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:2px 5px;
+    font-size: 0.8em;
+    border: 2px solid; 
+    animation: rainbow_animation 2s linear infinite; 
+}
+
+
+#chats {
+    flex-grow: 1;
+    display: flex;
+}
+
+.chat {
+    flex-grow: 1;
+    display: none; /* Hide chats by default */
+    flex-direction: column;
+    height: 100%;
+}
+
+.chat.active {
+    display: flex; /* Show only active chat */
+}
+
+:root {
+    --primary-color: #4CAF50; /* Зеленый цвет для акцентов */
+    --hover-color: #45a049; /* Темно-зеленый цвет для эффекта наведения */
+    --file-icon-color: white; /* Цвет иконки файла */
+    --file-count-color: white; /* Цвет счетчика файлов */
+    --file-count-bg: #4CAF50; /* Фон счетчика файлов */
+    --remove-btn-color: #FF5722; /* Цвет кнопки удаления */
+    --remove-btn-bg-hover: #FFCDD2; /* Фон кнопки удаления при наведении */
+}
+.messages {
+    overflow-y: auto; /* Scrollable area for messages */
+    flex-grow: 1; /* Take available space */
+    padding: 10px;
+}
+
+
+.upload-form {
+    position: fixed;
+    padding: 10px;
+    background: white;
+    border-top: 1px solid black;
+    position: sticky; /* Sticky to stay at bottom */
+    bottom: 0;
+    z-index: 10;
+    max-width: 750px;
+    min-height: 70px;
+    margin: 20px auto;
+    margin-top: 477px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message-text {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #cccccc; /* Светло-серый цвет рамки */
+    border-radius: 4px;
+    resize: vertical; /* Позволяет изменять размер только вертикально */
+    font-size: 17px;
+    color: #333333; /* Темно-серый цвет текста */
+    font-weight: bold;
+    min-height: 40px; /* Минимальная высота */
+    max-height: 150px; /* Максимальная высота */
+    overflow-y: auto; /* Вертикальная прокрутка при переполнении */
+    background-color: #f9f9f9; /* Светлый фон */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Плавный переход для рамки и тени */
+}
+
+.message-text:focus {
+    outline: none; /* Убираем стандартный контур при фокусе */
+    border-color: #007bff; /* Синий цвет рамки при фокусе */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Усиленная тень при фокусе */
+}
+
+/* Стиль для скроллбара */
+.message-text::-webkit-scrollbar {
+    width: 5px;
+}
+
+.message-text::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.message-text::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.message-text::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--file-icon-color);
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+.file-upload-label:hover {
+    background-color: var(--hover-color);
+}
+
+.file-icon {
+    font-size: 10px;
+}
+
+.file-count {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background-color: var(--file-count-bg);
+    color: var(--file-count-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.send-button {
+    background: none;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    color: var(--primary-color);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.send-button:hover {
+    background-color: var(--primary-color);
+    color: var(--file-icon-color);
+}
+
+.file-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.file-preview {
+    position: relative;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+}
+
+.file-preview:hover .remove-file {
+    display: flex;
+}
+
+.remove-file {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: var(--remove-btn-bg-hover);
+    color: var(--remove-btn-color);
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+.file-preview img,
+.file-preview video {
+    width: 100%; /* Заполняем весь контейнер по ширине */
+    height: 100%; /* Заполняем весь контейнер по высоте */
+    object-fit: cover; /* Изображение или видео будут помещаться полностью внутрь элемента */
+}
+
+.file-preview video {
+    border: 2px solid #007bff; /* Синяя рамка вокруг видео */
+    border-radius: 25px; /* Скругление углов */
+}
+
+.remove-file:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes loading {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.loading-animation {
+    background: linear-gradient(90deg, rgba(255,255,255,0.2) 50%, rgba(0,0,0,0.2) 75%, rgba(255,255,255,0.2) 100%);
+    background-size: 200% 200%;
+    animation: loading 1.5s infinite ease-in-out;
+}

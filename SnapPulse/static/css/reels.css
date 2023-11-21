@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.rels_container {
+    width: 100%;
+    min-height: 500px;
+    position: relative;
+}
+
+.reels {
+    width:  calc(100% - 70%);
+    height: 555px;
+    margin: 2% 35%;
+    transition: transform 0.5s ease;
+    border: 5px solid transparent; 
+    position: relative; 
+    overflow: hidden;
+}
+
+
+.reels:before, .reels:after {
+    content: '';
+    position: absolute;
+    top: -50%; right: -50%; bottom: -50%; left: -50%;
+    z-index: -1;
+    background: linear-gradient(60deg, #ff6ec4, #7873f5, #ff6ec4, #7873f5, #ff6ec4);
+    background-size: 300% 300%;
+    animation: moveGradient 4s infinite alternate;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+
+.reels.active {
+    transform: translateY(-555px); /* Примерное смещение вверх */
+}
+
+/* Стили для видео */
+video {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.block_icons {
+    margin-top: 0.3%;
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 549px;
+    right: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 3px solid transparent;
+    transition: border 0.3s ease;
+}
+
+.icons {
+    height: 70px;
+    width: 70px;
+    margin: auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+
+.block_icons:hover {
+    animation: discoBorder 1s infinite; /* Apply the disco animation */
+}
+
+/* Keyframes for disco-style border animation */
+@keyframes discoBorder {
+    0% { border-color: red; }
+    25% { border-color: rgb(132, 0, 255); }
+    50% { border-color: rgb(37, 181, 37); }
+    75% { border-color: yellow; }
+    100% { border-color: red; }
+}
+
+.heart {
+    background-image: url('../icons/easy_heart.png');
+    position: relative;
+    transform-origin: center;
+    border-radius: 50%;
+  }
+
+
+.view {
+    background-image: url('../icons/view.png');
+    border-radius: 50%;
+}
+
+.icons.heart:hover {
+    transform: scale(1.1);
+}
+
+.icons.heart .count {
+    padding-top: 7px;
+    color:chartreuse;
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+.view_count {
+    padding-top: 7px;
+    color: #240124;
+    font-size: 17px;
+    position: absolute;
+    top: 94%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+.icons.chat:hover {
+    transform: scale(1.2);
+}
+
+.reels_chat {
+    margin-top: 0.3%;
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 333px;
+    height: 549px;
+    border: 3px solid transparent; /* Set initial transparent border */
+    left: 3%;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    background-color: #f2f2f2;
+    padding: 10px;
+    animation: sexyBorderAnimation 3s linear infinite; /* Apply the border animation */
+}
+
+/* Keyframes for the border color animation */
+@keyframes sexyBorderAnimation {
+    0%, 100% {
+        border-color: #c90a6a; /* Hot pink at start and end */
+    }
+    33% {
+        border-color: #00FF00; /* Vivid green in the middle */
+    }
+    66% {
+        border-color: #bf1eff; /* Dodger blue */
+    }
+}
+
+
+@keyframes fadeInScaleUp {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+  
+.chat {
+    background-image: url('../icons/chat.png');
+    margin-top: 17px;
+  }
+
+
+.message {
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+    line-height: 1.5;
+}
+
+.author .author_name {
+    font-weight: bold;
+    color: #333;
+    display: block;
+}
+
+.author_text {
+    color: #000000;
+    word-wrap: break-word;
+    line-height: 1.4;
+    font-family: 'Lucida Console', Monaco, monospace;
+    font-size: 1em;
+    background-color: #c2bac3;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+
+.reels_chat .message:last-child .author_text {
+    margin-bottom: 70px;
+}
+
+
+
+
+/* Style for the chat form container */
+.chat_form {
+    margin-top: 470px;
+    position: fixed;
+    width: 333px;
+}
+
+/* Style for the message input field */
+#chat-message-input {
+    width: calc(100% - 20px);
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 2px solid #72236f;
+}
+
+/* Style for the send button */
+#chat-message-submit {
+    width: calc(100% - 20px);
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+#chat-message-submit:hover {
+    background-color: #0af719;
+}
+
